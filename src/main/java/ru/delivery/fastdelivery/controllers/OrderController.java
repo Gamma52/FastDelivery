@@ -2,6 +2,7 @@ package ru.delivery.fastdelivery.controllers;
 
 import java.util.List;
 
+import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,8 +30,8 @@ public class OrderController {
 	
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
-    public List<OrderDto> showOrders(@RequestParam(name = "limit", defaultValue = "10") Integer limit,
-    								 @RequestParam(name = "offset", defaultValue = "0") Integer offset) {		
+    public List<OrderDto> showOrders(@RequestParam(name = "limit", defaultValue = "10") @PositiveOrZero Integer limit,
+    								 @RequestParam(name = "offset", defaultValue = "0") @PositiveOrZero Integer offset) {		
         return orderService.getAllOrders(limit, offset);
     }
 	
